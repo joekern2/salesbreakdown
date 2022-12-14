@@ -13,7 +13,7 @@ import os
 ### read excel functions
 def getFiles():
     filename = 'MasterPL.xlsx'
-    xl_filetot = pd.ExcelFile(filename)
+    xl_filetot = pd.read_excel(filename)
     
     dtot = {sheet_name: xl_filetot.parse(sheet_name) 
               for sheet_name in xl_filetot.sheet_names}
@@ -22,7 +22,7 @@ def getFiles():
     uploaded_filec = st.file_uploader("Upload sheet for Charles")
     if uploaded_filec is not None:
         #read xls or xlsx
-        filec=pd.ExcelFile(uploaded_filec)
+        filec=pd.read_excel(uploaded_filec)
         dCharles = {sheet_name: filec.parse(sheet_name) 
                     for sheet_name in filec.sheet_names} 
     else:
@@ -32,7 +32,7 @@ def getFiles():
     uploaded_filee = st.file_uploader("Upload sheet for Eric")
     if uploaded_filee is not None:
         #read xls or xlsx
-        filee=pd.ExcelFile(uploaded_filee)
+        filee=pd.read_excel(uploaded_filee)
         dEric = {sheet_name: filee.parse(sheet_name) 
                     for sheet_name in filee.sheet_names} 
     else:
@@ -42,7 +42,7 @@ def getFiles():
     uploaded_filer = st.file_uploader("Upload sheet for Ryan")
     if uploaded_filer is not None:
         #read xls or xlsx
-        filer=pd.ExcelFile(uploaded_filer)
+        filer=pd.read_excel(uploaded_filer)
         dRyan = {sheet_name: filer.parse(sheet_name) 
                     for sheet_name in filer.sheet_names} 
     else:
@@ -52,7 +52,7 @@ def getFiles():
     uploaded_files = st.file_uploader("Upload sheet for Shane")
     if uploaded_files is not None:
         #read xls or xlsx
-        files=pd.ExcelFile(uploaded_files)
+        files=pd.read_excel(uploaded_files)
         dShane = {sheet_name: files.parse(sheet_name) 
                     for sheet_name in files.sheet_names} 
     else:
