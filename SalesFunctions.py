@@ -209,10 +209,8 @@ def sumCommission(c1, c2, c3, c4, month, c):
     return x
 
 
-# =============================================================================
-# @st.cache
-# def convert_df(df):
-#     # IMPORTANT: Cache the conversion to prevent computation on every rerun
-#     return df.to_csv().encode('utf-8')
-# 
-# =============================================================================
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
+
