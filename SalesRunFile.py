@@ -21,8 +21,10 @@ def run():
 #         master['Salesman P&L'].to_excel(writer, sheet_name='Data')
 # =============================================================================
 
+    #csv = convert_df(master)
+
     st.download_button(label='Download Current Result',
-                                data=master,
+                                data=master['Salesman P&L'],
                                 file_name= 'Master P&L.xlsx')
 
 
