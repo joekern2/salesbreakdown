@@ -12,6 +12,8 @@ import os
 
 ### read excel functions
 def getFiles():
+    dtot, dCharles, dEric, dRyan, dShane, check = 0
+    
     filename = 'MasterPL.xlsx'
     xl_filetot = pd.ExcelFile(filename)
     
