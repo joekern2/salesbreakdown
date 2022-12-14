@@ -25,7 +25,7 @@ def run():
 
     st.download_button(label='Download Current Result',
                                 data=CSV,
-                                file_name= 'Master P&L.xlsx')
+                                file_name= 'Master P&L.csv')
 
 
 
