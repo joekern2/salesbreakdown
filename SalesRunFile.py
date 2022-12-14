@@ -9,11 +9,25 @@ from SalesFunctions import *
 
 ## sales run file
 
-master, eric, ryan, charles, shane = getFiles()
+def run():
 
-master = getTotals(master, eric, ryan, charles, shane)
+    master, charles, eric, ryan, shane, c = getFiles()
+    
+    master = getTotals(master, charles, eric, ryan, shane, c)
+    
+# =============================================================================
+#     with pd.ExcelWriter('MasterPL.xlsx',
+#                         mode='a', if_sheet_exists='replace') as writer:  
+#         master['Salesman P&L'].to_excel(writer, sheet_name='Data')
+# =============================================================================
 
-with pd.ExcelWriter('MasterPL.xlsx',
-                    mode='a', if_sheet_exists='replace') as writer:  
-    master['Salesman P&L'].to_excel(writer, sheet_name='Total Salesman P&L')
+    st.download_button(label='Download Current Result',
+                                data=master,
+                                file_name= 'Master P&L.xlsx')
 
+
+
+
+
+if __name__ == '__main__':
+    run()
