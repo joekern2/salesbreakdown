@@ -23,9 +23,22 @@ def run():
 
     CSV = convert_df(master['Salesman P&L'])
 
+    if c == 0:
+        string = 'Master'
+    elif c == 1:
+        string = 'Charles'
+    elif c == 2:
+        string = 'Eric'
+    elif c == 3:
+        string = 'Ryan'
+    elif c == 4:
+        string = 'Shane'
+        
+    string += ' P&L.csv'
+
     st.download_button(label='Download Current Result',
                                 data=CSV,
-                                file_name= 'Master P&L.csv')
+                                file_name= string)
 
 
 
