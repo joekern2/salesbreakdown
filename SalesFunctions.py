@@ -19,12 +19,23 @@ def getFiles():
     dShane = 0
     check = 0
     
-    filename = 'MasterPL.xlsx'
-    xl_filetot = pd.ExcelFile(filename)
+    #filename = 'MasterPL.xlsx'
+    #xl_filetot = pd.ExcelFile(filename)
     
-    dtot = {sheet_name: xl_filetot.parse(sheet_name) 
-              for sheet_name in xl_filetot.sheet_names}
+    #dtot = {sheet_name: xl_filetot.parse(sheet_name) 
+    #          for sheet_name in xl_filetot.sheet_names}
     
+
+    uploaded_filem = st.file_uploader("Upload Master File")
+    if uploaded_filem is not None:
+        #read xls or xlsx
+        filem=pd.ExcelFile(uploaded_filem)
+        dtot = {sheet_name: filem.parse(sheet_name) 
+                    for sheet_name in filem.sheet_names} 
+    else:
+        st.warning("you need to upload a csv or excel file.")
+
+
 
     uploaded_filec = st.file_uploader("Upload sheet for Charles")
     if uploaded_filec is not None:
@@ -114,42 +125,42 @@ def getFiles():
 
 
 def getTotals(master, c1, c2, c3, c4, c):
-    master['Salesman P&L']['Unnamed: 2'][9] = 0
-    master['Salesman P&L']['Unnamed: 3'][9] = 0
-    master['Salesman P&L']['Unnamed: 4'][9] = 0
-    master['Salesman P&L']['Unnamed: 5'][9] = 0
-    master['Salesman P&L']['Unnamed: 6'][9] = 0
-    master['Salesman P&L']['Unnamed: 7'][9] = 0
+    master['Salesman P&L']['Unnamed: 4'][10] = 0
+    master['Salesman P&L']['Unnamed: 5'][10] = 0
+    master['Salesman P&L']['Unnamed: 8'][10] = 0
+    master['Salesman P&L']['Unnamed: 9'][10] = 0
+    master['Salesman P&L']['Unnamed: 12'][10] = 0
+    master['Salesman P&L']['Unnamed: 13'][10] = 0
     #commission
-    master['Salesman P&L']['Unnamed: 8'][2] = 0
+    master['Salesman P&L']['Unnamed: 13'][2] = 0
     for i in range(12):
-        month = master['Salesman P&L']['SALESMAN P&L'][13:25].iloc[i]
+        month = master['Salesman P&L']['SALESMAN P&L'][14:26].iloc[i]
         x, y = sumNewTrucks(c1, c2, c3, c4, month, c)
-        master['Salesman P&L']['Unnamed: 2'][13 + i] = x
-        master['Salesman P&L']['Unnamed: 2'][9] += x
-        master['Salesman P&L']['Unnamed: 3'][13 + i] = y
-        master['Salesman P&L']['Unnamed: 3'][9] += y
+        master['Salesman P&L']['Unnamed: 4'][14 + i] = x
+        master['Salesman P&L']['Unnamed: 4'][10] += x
+        master['Salesman P&L']['Unnamed: 5'][14 + i] = y
+        master['Salesman P&L']['Unnamed: 5'][10] += y
         
         a, b = sumOldTrucks(c1, c2, c3, c4, month, c)
-        master['Salesman P&L']['Unnamed: 4'][13 + i] = a
-        master['Salesman P&L']['Unnamed: 4'][9] += a
-        master['Salesman P&L']['Unnamed: 5'][13 + i] = b
-        master['Salesman P&L']['Unnamed: 5'][9] += b
+        master['Salesman P&L']['Unnamed: 8'][14 + i] = a
+        master['Salesman P&L']['Unnamed: 8'][10] += a
+        master['Salesman P&L']['Unnamed: 9'][14 + i] = b
+        master['Salesman P&L']['Unnamed: 9'][10] += b
         
-        master['Salesman P&L']['Unnamed: 6'][13 + i] = x + a
-        master['Salesman P&L']['Unnamed: 6'][9] += x + a
-        master['Salesman P&L']['Unnamed: 7'][13 + i] = y + b
-        master['Salesman P&L']['Unnamed: 7'][9] += y + b
+        master['Salesman P&L']['Unnamed: 12'][14 + i] = x + a
+        master['Salesman P&L']['Unnamed: 12'][10] += x + a
+        master['Salesman P&L']['Unnamed: 13'][14 + i] = y + b
+        master['Salesman P&L']['Unnamed: 13'][10] += y + b
         
         z = sumCommission(c1, c2, c3, c4, month, c)
-        master['Salesman P&L']['Unnamed: 8'][2] += z
+        master['Salesman P&L']['Unnamed: 13'][2] += z
     
-    master['Salesman P&L']['Unnamed: 2'][10] = master['Salesman P&L']['Unnamed: 2'][9]
-    master['Salesman P&L']['Unnamed: 3'][10] = master['Salesman P&L']['Unnamed: 3'][9]
-    master['Salesman P&L']['Unnamed: 4'][10] = master['Salesman P&L']['Unnamed: 4'][9]
-    master['Salesman P&L']['Unnamed: 5'][10] = master['Salesman P&L']['Unnamed: 5'][9]
-    master['Salesman P&L']['Unnamed: 6'][10] = master['Salesman P&L']['Unnamed: 6'][9]
-    master['Salesman P&L']['Unnamed: 7'][10] = master['Salesman P&L']['Unnamed: 7'][9]
+    master['Salesman P&L']['Unnamed: 4'][11] = master['Salesman P&L']['Unnamed: 4'][10]
+    master['Salesman P&L']['Unnamed: 5'][11] = master['Salesman P&L']['Unnamed: 5'][10]
+    master['Salesman P&L']['Unnamed: 8'][11] = master['Salesman P&L']['Unnamed: 8'][10]
+    master['Salesman P&L']['Unnamed: 9'][11] = master['Salesman P&L']['Unnamed: 9'][10]
+    master['Salesman P&L']['Unnamed: 12'][11] = master['Salesman P&L']['Unnamed: 6'][10]
+    master['Salesman P&L']['Unnamed: 13'][11] = master['Salesman P&L']['Unnamed: 13'][10]
     
     return master
 
