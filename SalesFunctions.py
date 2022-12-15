@@ -46,7 +46,7 @@ def getFiles():
 
     st.write('\n=======================================================================================')
 
-    uploaded_filec = st.file_uploader("Upload sheet for Charles")
+    uploaded_filec = st.file_uploader("Upload Entries sheet for Charles")
     if uploaded_filec is not None:
         c1check = 1
         #read xls or xlsx
@@ -58,7 +58,7 @@ def getFiles():
         
     st.write('\n=======================================================================================')
 
-    uploaded_filee = st.file_uploader("Upload sheet for Eric")
+    uploaded_filee = st.file_uploader("Upload Entries sheet for Eric")
     if uploaded_filee is not None:
         c2check = 1
         #read xls or xlsx
@@ -70,7 +70,7 @@ def getFiles():
         
     st.write('\n=======================================================================================')
         
-    uploaded_filer = st.file_uploader("Upload sheet for Ryan")
+    uploaded_filer = st.file_uploader("Upload Entries sheet for Ryan")
     if uploaded_filer is not None:
         c3check = 1
         #read xls or xlsx
@@ -82,7 +82,7 @@ def getFiles():
         
     st.write('\n=======================================================================================')
         
-    uploaded_files = st.file_uploader("Upload sheet for Shane")
+    uploaded_files = st.file_uploader("Upload Entries sheet for Shane")
     if uploaded_files is not None:
         c4check = 1
         #read xls or xlsx
