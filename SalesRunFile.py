@@ -11,17 +11,17 @@ from SalesFunctions import *
 
 def run():
 
-    master, charles, eric, ryan, shane, c, d = getFiles()
+    master, charles, eric, ryan, shane, c, mc, c1c, c2c, c3c, c4c = getFiles()
     
-    if d == 1:
-        master = getTotals(master, charles, eric, ryan, shane, c)
+    if mc == 1:
+        master = getTotals(master, charles, eric, ryan, shane, c, c1c, c2c, c3c, c4c)
     
 # =============================================================================
 #     with pd.ExcelWriter('MasterPL.xlsx',
 #                         mode='a', if_sheet_exists='replace') as writer:  
 #         master['Salesman P&L'].to_excel(writer, sheet_name='Data')
 # =============================================================================
-    if d == 1:
+    if mc == 1:
         CSV = convert_df(master['Salesman P&L'])
 
     if c == 0:
@@ -37,7 +37,7 @@ def run():
         
     string += ' P&L.csv'
     
-    if d == 1:
+    if mc == 1:
         st.download_button(label='Download Current Result',
                                     data=CSV,
                                     file_name= string)
