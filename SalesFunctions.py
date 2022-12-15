@@ -30,6 +30,12 @@ def getFiles():
     #dtot = {sheet_name: xl_filetot.parse(sheet_name) 
     #          for sheet_name in xl_filetot.sheet_names}
     
+    st.header('In first box, upload the MasterPL file or a Salesman\'s PL file - ',
+              'the file that will hold the updated data.\m')
+    
+    st.header('In the remaining columns, upload the salesman\'s Entries file - ',
+              'the files that have the data to be loaded into the first file.\n',
+              'If uploading data for the masterPL, make sure to load all four salesmen\'s entry files.')
 
     uploaded_filem = st.file_uploader("Upload Master File")
     if uploaded_filem is not None:
@@ -39,9 +45,9 @@ def getFiles():
         dtot = {sheet_name: filem.parse(sheet_name) 
                     for sheet_name in filem.sheet_names} 
     else:
-        st.warning("you need to upload a csv or excel file.")
+        st.warning("MasterPL or NamePL if for one Salesman")
 
-
+    st.write('\n======================================================')
 
     uploaded_filec = st.file_uploader("Upload sheet for Charles")
     if uploaded_filec is not None:
@@ -51,9 +57,10 @@ def getFiles():
         dCharles = {sheet_name: filec.parse(sheet_name) 
                     for sheet_name in filec.sheet_names} 
     else:
-        st.warning("you need to upload a csv or excel file.")
+        st.warning("NamePLEntries File for Salesman 1")       
         
-        
+    st.write('\n======================================================')
+
     uploaded_filee = st.file_uploader("Upload sheet for Eric")
     if uploaded_filee is not None:
         c2check = 1
@@ -62,8 +69,9 @@ def getFiles():
         dEric = {sheet_name: filee.parse(sheet_name) 
                     for sheet_name in filee.sheet_names} 
     else:
-        st.warning("you need to upload a csv or excel file.")
+        st.warning("NamePLEntries File for Salesman 2")
         
+    st.write('\n======================================================')
         
     uploaded_filer = st.file_uploader("Upload sheet for Ryan")
     if uploaded_filer is not None:
@@ -73,8 +81,9 @@ def getFiles():
         dRyan = {sheet_name: filer.parse(sheet_name) 
                     for sheet_name in filer.sheet_names} 
     else:
-        st.warning("you need to upload a csv or excel file.")
+        st.warning("NamePLEntries File for Salesman 3")
         
+    st.write('\n======================================================')
         
     uploaded_files = st.file_uploader("Upload sheet for Shane")
     if uploaded_files is not None:
@@ -84,16 +93,17 @@ def getFiles():
         dShane = {sheet_name: files.parse(sheet_name) 
                     for sheet_name in files.sheet_names} 
     else:
-        st.warning("you need to upload a csv or excel file.")
+        st.warning("NamePLEntries File for Salesman 4")
         
+    st.write('\n======================================================')
     
     selection = st.radio(
-    "Who\'s P&L would you like to see?",
-    ('All', 'Charles', 'Eric', 'Ryan', 'Shane'))
+    "Who\'s P&L would you like to update?",
+    ('Master', 'Charles', 'Eric', 'Ryan', 'Shane'))
     
     check = 100
     
-    if selection == 'All':
+    if selection == 'Master':
         check = 0
     elif selection == 'Charles':
         check = 1
