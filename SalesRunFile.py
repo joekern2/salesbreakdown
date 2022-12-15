@@ -13,7 +13,8 @@ def run():
 
     master, charles, eric, ryan, shane, c, d = getFiles()
     
-    master = getTotals(master, charles, eric, ryan, shane, c)
+    if d == 1:
+        master = getTotals(master, charles, eric, ryan, shane, c)
     
 # =============================================================================
 #     with pd.ExcelWriter('MasterPL.xlsx',
