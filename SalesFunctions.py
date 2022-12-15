@@ -31,7 +31,7 @@ def getFiles():
     #          for sheet_name in xl_filetot.sheet_names}
     
     st.header('In first box, upload the MasterPL file or a Salesman\'s PL file - ',
-              'the file that will hold the updated data.\m')
+              'the file that will hold the updated data.\n')
     
     st.header('In the remaining columns, upload the salesman\'s Entries file - ',
               'the files that have the data to be loaded into the first file.\n',
