@@ -30,12 +30,9 @@ def getFiles():
     #dtot = {sheet_name: xl_filetot.parse(sheet_name) 
     #          for sheet_name in xl_filetot.sheet_names}
     
-    st.header('In first box, upload the MasterPL file or a Salesman\'s PL file - ',
-              'the file that will hold the updated data.\n')
+    st.header('In first box, upload the MasterPL file or a Salesman\'s PL file - the file that will hold the updated data.\n')
     
-    st.header('In the remaining columns, upload the salesman\'s Entries file - ',
-              'the files that have the data to be loaded into the first file.\n',
-              'If uploading data for the masterPL, make sure to load all four salesmen\'s entry files.')
+    st.header('In the remaining columns, upload the salesman\'s Entries file - the files that have the data to be loaded into the first file.\n If uploading data for the masterPL, make sure to load all four salesmen\'s entry files.')
 
     uploaded_filem = st.file_uploader("Upload Master File")
     if uploaded_filem is not None:
