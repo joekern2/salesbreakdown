@@ -11,7 +11,7 @@ from SalesFunctions import *
 
 def run():
 
-    master, charles, eric, ryan, shane, c = getFiles()
+    master, charles, eric, ryan, shane, c, d = getFiles()
     
     master = getTotals(master, charles, eric, ryan, shane, c)
     
@@ -35,10 +35,11 @@ def run():
         string = 'Shane'
         
     string += ' P&L.csv'
-
-    st.download_button(label='Download Current Result',
-                                data=CSV,
-                                file_name= string)
+    
+    if d == 1:
+        st.download_button(label='Download Current Result',
+                                    data=CSV,
+                                    file_name= string)
 
 
 

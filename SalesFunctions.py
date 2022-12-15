@@ -18,6 +18,7 @@ def getFiles():
     dRyan = 0
     dShane = 0
     check = 0
+    downloadcheck = 0
     
     #filename = 'MasterPL.xlsx'
     #xl_filetot = pd.ExcelFile(filename)
@@ -28,6 +29,7 @@ def getFiles():
 
     uploaded_filem = st.file_uploader("Upload Master File")
     if uploaded_filem is not None:
+        downloadcheck = 1
         #read xls or xlsx
         filem=pd.ExcelFile(uploaded_filem)
         dtot = {sheet_name: filem.parse(sheet_name) 
@@ -121,7 +123,7 @@ def getFiles():
 #               for sheet_name in xl_fileShane.sheet_names}
 # =============================================================================
     
-    return dtot, dCharles, dEric, dRyan, dShane, check
+    return dtot, dCharles, dEric, dRyan, dShane, check, downloadcheck
 
 
 def getTotals(master, c1, c2, c3, c4, c):
