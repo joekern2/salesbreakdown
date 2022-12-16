@@ -22,8 +22,10 @@ def run():
 #         master['Salesman P&L'].to_excel(writer, sheet_name='Data')
 # =============================================================================
     
-    temp = master['Salesman P&L']
-    st.dataframe(temp['SALESMAN P&L':'Unnamed 13'])
+    temp = master['Salesman P&L'][['SALESMAN P&L', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4',
+                                   'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9',
+                                   'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13']]
+    st.dataframe(temp)
 
     if mc == 1:
         CSV = convert_df(master['Salesman P&L'])
