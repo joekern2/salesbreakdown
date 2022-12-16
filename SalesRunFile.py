@@ -21,8 +21,9 @@ def run():
 #                         mode='a', if_sheet_exists='replace') as writer:  
 #         master['Salesman P&L'].to_excel(writer, sheet_name='Data')
 # =============================================================================
-
-    st.dataframe(master['Salesman P&L'])
+    
+    temp = master['Salesman P&L']
+    st.dataframe(temp['SALESMAN P&L':'Unnamed 13'])
 
     if mc == 1:
         CSV = convert_df(master['Salesman P&L'])
