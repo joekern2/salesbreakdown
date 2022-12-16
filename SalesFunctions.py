@@ -45,6 +45,7 @@ def getFiles():
         st.warning("MasterPL or NamePL if for one Salesman")
 
     st.write('\n========================================================================================')
+    st.write('\n')
 
     uploaded_filec = st.file_uploader("Upload Entries sheet for Charles")
     if uploaded_filec is not None:
@@ -57,6 +58,7 @@ def getFiles():
         st.warning("NamePLEntries File for Salesman 1")       
         
     st.write('\n========================================================================================')
+    st.write('\n')
 
     uploaded_filee = st.file_uploader("Upload Entries sheet for Eric")
     if uploaded_filee is not None:
@@ -69,7 +71,8 @@ def getFiles():
         st.warning("NamePLEntries File for Salesman 2")
         
     st.write('\n========================================================================================')
-        
+    st.write('\n')
+
     uploaded_filer = st.file_uploader("Upload Entries sheet for Ryan")
     if uploaded_filer is not None:
         c3check = 1
@@ -81,7 +84,8 @@ def getFiles():
         st.warning("NamePLEntries File for Salesman 3")
         
     st.write('\n========================================================================================')
-        
+    st.write('\n')
+  
     uploaded_files = st.file_uploader("Upload Entries sheet for Shane")
     if uploaded_files is not None:
         c4check = 1
@@ -93,7 +97,8 @@ def getFiles():
         st.warning("NamePLEntries File for Salesman 4")
         
     st.write('\n========================================================================================')
-    
+    st.write('\n')
+
     selection = st.radio(
     "Who\'s P&L would you like to update?",
     ('Master', 'Charles', 'Eric', 'Ryan', 'Shane'))
