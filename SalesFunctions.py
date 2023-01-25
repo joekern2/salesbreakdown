@@ -17,12 +17,14 @@ def getFiles():
     dEric = 0
     dRyan = 0
     dShane = 0
+    dSales = 0
     check = 0
     mcheck = 0
     c1check = 0
     c2check = 0
     c3check = 0
     c4check = 0
+    c5check = 0
     
     
     
