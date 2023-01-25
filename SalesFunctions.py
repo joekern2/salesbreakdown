@@ -24,11 +24,7 @@ def getFiles():
     c3check = 0
     c4check = 0
     
-    #filename = 'MasterPL.xlsx'
-    #xl_filetot = pd.ExcelFile(filename)
     
-    #dtot = {sheet_name: xl_filetot.parse(sheet_name) 
-    #          for sheet_name in xl_filetot.sheet_names}
     
     st.header('In first box, upload the MasterPL file or a Salesman\'s PL file - the file that will hold the updated data.\n')
     
@@ -98,10 +94,25 @@ def getFiles():
         
     st.write('\n========================================================================================')
     st.write('\n')
+    
+    uploaded_files = st.file_uploader("Upload Entries sheet for Salesman 5")
+    if uploaded_files is not None:
+        c5check = 1
+        #read xls or xlsx
+        file5=pd.ExcelFile(uploaded_files)
+        dSales = {sheet_name: file5.parse(sheet_name) 
+                    for sheet_name in file5.sheet_names} 
+    else:
+        st.warning("NamePLEntries File for Salesman 5")
+        
+    st.write('\n========================================================================================')
+    st.write('\n')
+    
+    
 
     selection = st.radio(
     "Who\'s P&L would you like to update?",
-    ('Master', 'Charles', 'Eric', 'Ryan', 'Shane'))
+    ('Master', 'Charles', 'Eric', 'Ryan', 'Shane', 'Salesman 5'))
     
     check = 100
     
@@ -115,38 +126,16 @@ def getFiles():
         check = 3
     elif selection == 'Shane':
         check = 4
-# =============================================================================
-#     filename = '~/Documents/BrentProj/EricPL.xlsx'
-#     xl_fileEric = pd.ExcelFile(filename)
-#     
-#     dEric = {sheet_name: xl_fileEric.parse(sheet_name) 
-#               for sheet_name in xl_fileEric.sheet_names}
-#     
-#     
-#     filename = '~/Documents/BrentProj/RyanPL.xlsx'
-#     xl_fileRyan = pd.ExcelFile(filename)
-#     
-#     dRyan = {sheet_name: xl_fileRyan.parse(sheet_name) 
-#               for sheet_name in xl_fileRyan.sheet_names}
-#     
-#     filename = '~/Documents/BrentProj/CharlesPL.xlsx'
-#     xl_fileCharles = pd.ExcelFile(filename)
-#     
-#     dCharles = {sheet_name: xl_fileCharles.parse(sheet_name) 
-#               for sheet_name in xl_fileCharles.sheet_names}
-#     
-#     
-#     filename = '~/Documents/BrentProj/ShanePL.xlsx'
-#     xl_fileShane = pd.ExcelFile(filename)
-#     
-#     dShane = {sheet_name: xl_fileShane.parse(sheet_name) 
-#               for sheet_name in xl_fileShane.sheet_names}
-# =============================================================================
+    elif selection == 'Salesman 5':
+        check = 5
+
+
+
     
-    return dtot, dCharles, dEric, dRyan, dShane, check, mcheck, c1check, c2check, c3check, c4check
+    return dtot, dCharles, dEric, dRyan, dShane, dSales, check, mcheck, c1check, c2check, c3check, c4check, c5check
 
 
-def getTotals(master, c1, c2, c3, c4, c, c1c, c2c, c3c, c4c):
+def getTotals(master, c1, c2, c3, c4, c5, c, c1c, c2c, c3c, c4c, c5c):
     master['Salesman P&L']['Unnamed: 4'][10] = 0
     master['Salesman P&L']['Unnamed: 5'][10] = 0
     master['Salesman P&L']['Unnamed: 8'][10] = 0
@@ -157,13 +146,13 @@ def getTotals(master, c1, c2, c3, c4, c, c1c, c2c, c3c, c4c):
     master['Salesman P&L']['Unnamed: 13'][2] = 0
     for i in range(12):
         month = master['Salesman P&L']['SALESMAN P&L'][14:26].iloc[i]
-        x, y = sumNewTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c)
+        x, y = sumNewTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
         master['Salesman P&L']['Unnamed: 4'][14 + i] = x
         master['Salesman P&L']['Unnamed: 4'][10] += x
         master['Salesman P&L']['Unnamed: 5'][14 + i] = y
         master['Salesman P&L']['Unnamed: 5'][10] += y
         
-        a, b = sumOldTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c)
+        a, b = sumOldTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
         master['Salesman P&L']['Unnamed: 8'][14 + i] = a
         master['Salesman P&L']['Unnamed: 8'][10] += a
         master['Salesman P&L']['Unnamed: 9'][14 + i] = b
@@ -174,7 +163,7 @@ def getTotals(master, c1, c2, c3, c4, c, c1c, c2c, c3c, c4c):
         master['Salesman P&L']['Unnamed: 13'][14 + i] = y + b
         master['Salesman P&L']['Unnamed: 13'][10] += y + b
         
-        z = sumCommission(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c)
+        z = sumCommission(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
         master['Salesman P&L']['Unnamed: 13'][2] += z
     
     master['Salesman P&L']['Unnamed: 4'][11] = master['Salesman P&L']['Unnamed: 4'][10]
@@ -187,7 +176,7 @@ def getTotals(master, c1, c2, c3, c4, c, c1c, c2c, c3c, c4c):
     return master
 
 
-def sumNewTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
+def sumNewTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
     x = 0
     y = 0
     
@@ -207,11 +196,15 @@ def sumNewTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
         if c4c == 1:
             x += c4[month]['Unnamed: 4'][25]
             y += c4[month]['Unnamed: 5'][25]
+    if c == 0 or c == 5:
+        if c5c == 1:
+            x += c5[month]['Unnamed: 4'][25]
+            y += c5[month]['Unnamed: 5'][25]
     
     return x, y
     
     
-def sumOldTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
+def sumOldTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
     x = 0
     y = 0
     
@@ -231,11 +224,15 @@ def sumOldTrucks(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
         if c4c == 1:
             x += c4[month]['Unnamed: 8'][25]
             y += c4[month]['Unnamed: 9'][25]
+    if c == 0 or c == 5:
+        if c5c == 1:
+            x += c5[month]['Unnamed: 8'][25]
+            y += c5[month]['Unnamed: 9'][25]
         
     return x, y
 
 
-def sumCommission(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
+def sumCommission(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
     x = 0
     if c == 0 or c == 1:
         if c1c == 1:
@@ -249,6 +246,9 @@ def sumCommission(c1, c2, c3, c4, month, c, c1c, c2c, c3c, c4c):
     if c == 0 or c == 4:
         if c4c == 1:
             x += c4[month]['Unnamed: 14'][25]
+    if c == 0 or c == 5:
+        if c5c == 1:
+            x += c5[month]['Unnamed: 14'][25]
 
     
     return x

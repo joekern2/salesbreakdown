@@ -11,10 +11,10 @@ from SalesFunctions import *
 
 def run():
 
-    master, charles, eric, ryan, shane, c, mc, c1c, c2c, c3c, c4c = getFiles()
+    master, charles, eric, ryan, shane, sale5, c, mc, c1c, c2c, c3c, c4c, c5c = getFiles()
     
     if mc == 1:
-        master = getTotals(master, charles, eric, ryan, shane, c, c1c, c2c, c3c, c4c)
+        master = getTotals(master, charles, eric, ryan, shane, sale5, c, c1c, c2c, c3c, c4c, c5c)
     
 # =============================================================================
 #     with pd.ExcelWriter('MasterPL.xlsx',
@@ -47,6 +47,8 @@ def run():
         string = 'Ryan'
     elif c == 4:
         string = 'Shane'
+    elif c == 5:
+        string = 'ExtraSalesman'
         
     string += ' P&L.csv'
     
