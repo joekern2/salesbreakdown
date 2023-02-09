@@ -45,7 +45,7 @@ def getFiles():
     st.write('\n========================================================================================')
     st.write('\n')
 
-    uploaded_filec = st.file_uploader("Upload Entries sheet for Charles")
+    uploaded_filec = st.file_uploader("Upload Entries sheet for Salesman 1")
     if uploaded_filec is not None:
         c1check = 1
         #read xls or xlsx
@@ -58,7 +58,7 @@ def getFiles():
     st.write('\n========================================================================================')
     st.write('\n')
 
-    uploaded_filee = st.file_uploader("Upload Entries sheet for Eric")
+    uploaded_filee = st.file_uploader("Upload Entries sheet for Salesman 2")
     if uploaded_filee is not None:
         c2check = 1
         #read xls or xlsx
@@ -71,7 +71,7 @@ def getFiles():
     st.write('\n========================================================================================')
     st.write('\n')
 
-    uploaded_filer = st.file_uploader("Upload Entries sheet for Ryan")
+    uploaded_filer = st.file_uploader("Upload Entries sheet for Salesman 3")
     if uploaded_filer is not None:
         c3check = 1
         #read xls or xlsx
@@ -84,7 +84,7 @@ def getFiles():
     st.write('\n========================================================================================')
     st.write('\n')
   
-    uploaded_files = st.file_uploader("Upload Entries sheet for Shane")
+    uploaded_files = st.file_uploader("Upload Entries sheet for Salesman 4")
     if uploaded_files is not None:
         c4check = 1
         #read xls or xlsx
@@ -114,19 +114,19 @@ def getFiles():
 
     selection = st.radio(
     "Who\'s P&L would you like to update?",
-    ('Master', 'Charles', 'Eric', 'Ryan', 'Shane', 'Salesman 5'))
+    ('Master', 'Salesman 1', 'Salesman 2', 'Salesman 3', 'Salesman 4', 'Salesman 5'))
     
     check = 100
     
     if selection == 'Master':
         check = 0
-    elif selection == 'Charles':
+    elif selection == 'Salesman 1':
         check = 1
-    elif selection == 'Eric':
+    elif selection == 'Salesman 2':
         check = 2
-    elif selection == 'Ryan':
+    elif selection == 'Salesman 3':
         check = 3
-    elif selection == 'Shane':
+    elif selection == 'Salesman 4':
         check = 4
     elif selection == 'Salesman 5':
         check = 5
