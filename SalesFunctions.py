@@ -18,6 +18,9 @@ def getFiles():
     dRyan = 0
     dShane = 0
     dSales = 0
+    dSales6 = 0
+    dSales7 = 0
+    dSales8 = 0
     check = 0
     mcheck = 0
     c1check = 0
@@ -25,6 +28,9 @@ def getFiles():
     c3check = 0
     c4check = 0
     c5check = 0
+    c6check = 0
+    c7check = 0
+    c8check = 0
     
     
     
@@ -110,11 +116,50 @@ def getFiles():
     st.write('\n========================================================================================')
     st.write('\n')
     
+    uploaded_files = st.file_uploader("Upload Entries sheet for Salesman 6")
+    if uploaded_files is not None:
+        c6check = 1
+        #read xls or xlsx
+        file6=pd.ExcelFile(uploaded_files)
+        dSales6 = {sheet_name: file6.parse(sheet_name) 
+                    for sheet_name in file6.sheet_names} 
+    else:
+        st.warning("NamePLEntries File for Salesman 6")
+        
+    st.write('\n========================================================================================')
+    st.write('\n')
+    
+    uploaded_files = st.file_uploader("Upload Entries sheet for Salesman 7")
+    if uploaded_files is not None:
+        c7check = 1
+        #read xls or xlsx
+        file7=pd.ExcelFile(uploaded_files)
+        dSales7 = {sheet_name: file7.parse(sheet_name) 
+                    for sheet_name in file7.sheet_names} 
+    else:
+        st.warning("NamePLEntries File for Salesman 7")
+        
+    st.write('\n========================================================================================')
+    st.write('\n')
+    
+    uploaded_files = st.file_uploader("Upload Entries sheet for Salesman 8")
+    if uploaded_files is not None:
+        c8check = 1
+        #read xls or xlsx
+        file8=pd.ExcelFile(uploaded_files)
+        dSales8 = {sheet_name: file8.parse(sheet_name) 
+                    for sheet_name in file8.sheet_names} 
+    else:
+        st.warning("NamePLEntries File for Salesman 8")
+        
+    st.write('\n========================================================================================')
+    st.write('\n')
+    
     
 
     selection = st.radio(
     "Who\'s P&L would you like to update?",
-    ('Master', 'Salesman 1', 'Salesman 2', 'Salesman 3', 'Salesman 4', 'Salesman 5'))
+    ('Master', 'Salesman 1', 'Salesman 2', 'Salesman 3', 'Salesman 4', 'Salesman 5', 'Salesman 6', 'Salesman 7', 'Salesman 8'))
     
     check = 100
     
@@ -130,14 +175,20 @@ def getFiles():
         check = 4
     elif selection == 'Salesman 5':
         check = 5
+    elif selection == 'Salesman 6':
+        check = 6
+    elif selection == 'Salesman 7':
+        check = 7
+    elif selection == 'Salesman 8':
+        check = 8
 
 
 
     
-    return dtot, dCharles, dEric, dRyan, dShane, dSales, check, mcheck, c1check, c2check, c3check, c4check, c5check
+    return dtot, dCharles, dEric, dRyan, dShane, dSales, dSales6, dSales7, dSales8, check, mcheck, c1check, c2check, c3check, c4check, c5check, c6check, c7check, c8check
 
 
-def getTotals(master, c1, c2, c3, c4, c5, c, c1c, c2c, c3c, c4c, c5c):
+def getTotals(master, c1, c2, c3, c4, c5, c6, c7, c8, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c):
     master['Salesman P&L']['Unnamed: 4'][10] = 0
     master['Salesman P&L']['Unnamed: 5'][10] = 0
     master['Salesman P&L']['Unnamed: 8'][10] = 0
@@ -148,13 +199,13 @@ def getTotals(master, c1, c2, c3, c4, c5, c, c1c, c2c, c3c, c4c, c5c):
     master['Salesman P&L']['Unnamed: 13'][2] = 0
     for i in range(12):
         month = master['Salesman P&L']['SALESMAN P&L'][14:26].iloc[i]
-        x, y = sumNewTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
+        x, y = sumNewTrucks(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c)
         master['Salesman P&L']['Unnamed: 4'][14 + i] = x
         master['Salesman P&L']['Unnamed: 4'][10] += x
         master['Salesman P&L']['Unnamed: 5'][14 + i] = y
         master['Salesman P&L']['Unnamed: 5'][10] += y
         
-        a, b = sumOldTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
+        a, b = sumOldTrucks(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c)
         master['Salesman P&L']['Unnamed: 8'][14 + i] = a
         master['Salesman P&L']['Unnamed: 8'][10] += a
         master['Salesman P&L']['Unnamed: 9'][14 + i] = b
@@ -165,7 +216,7 @@ def getTotals(master, c1, c2, c3, c4, c5, c, c1c, c2c, c3c, c4c, c5c):
         master['Salesman P&L']['Unnamed: 13'][14 + i] = y + b
         master['Salesman P&L']['Unnamed: 13'][10] += y + b
         
-        z = sumCommission(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c)
+        z = sumCommission(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c)
         master['Salesman P&L']['Unnamed: 13'][2] += z
     
     master['Salesman P&L']['Unnamed: 4'][11] = master['Salesman P&L']['Unnamed: 4'][10]
@@ -178,7 +229,7 @@ def getTotals(master, c1, c2, c3, c4, c5, c, c1c, c2c, c3c, c4c, c5c):
     return master
 
 
-def sumNewTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
+def sumNewTrucks(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c):
     x = 0
     y = 0
     
@@ -202,11 +253,23 @@ def sumNewTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
         if c5c == 1:
             x += c5[month]['Unnamed: 4'][25]
             y += c5[month]['Unnamed: 5'][25]
+    if c == 0 or c == 6:
+        if c6c == 1:
+            x += c6[month]['Unnamed: 4'][25]
+            y += c6[month]['Unnamed: 5'][25]
+    if c == 0 or c == 7:
+        if c7c == 1:
+            x += c7[month]['Unnamed: 4'][25]
+            y += c7[month]['Unnamed: 5'][25]
+    if c == 0 or c == 8:
+        if c8c == 1:
+            x += c8[month]['Unnamed: 4'][25]
+            y += c8[month]['Unnamed: 5'][25]
     
     return x, y
     
     
-def sumOldTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
+def sumOldTrucks(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c):
     x = 0
     y = 0
     
@@ -230,11 +293,23 @@ def sumOldTrucks(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
         if c5c == 1:
             x += c5[month]['Unnamed: 8'][25]
             y += c5[month]['Unnamed: 9'][25]
+    if c == 0 or c == 6:
+        if c6c == 1:
+            x += c6[month]['Unnamed: 8'][25]
+            y += c6[month]['Unnamed: 9'][25]
+    if c == 0 or c == 7:
+        if c7c == 1:
+            x += c7[month]['Unnamed: 8'][25]
+            y += c7[month]['Unnamed: 9'][25]
+    if c == 0 or c == 8:
+        if c8c == 1:
+            x += c8[month]['Unnamed: 8'][25]
+            y += c8[month]['Unnamed: 9'][25]
         
     return x, y
 
 
-def sumCommission(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
+def sumCommission(c1, c2, c3, c4, c5, c6, c7, c8, month, c, c1c, c2c, c3c, c4c, c5c, c6c, c7c, c8c):
     x = 0
     if c == 0 or c == 1:
         if c1c == 1:
@@ -251,6 +326,15 @@ def sumCommission(c1, c2, c3, c4, c5, month, c, c1c, c2c, c3c, c4c, c5c):
     if c == 0 or c == 5:
         if c5c == 1:
             x += c5[month]['Unnamed: 14'][25]
+    if c == 0 or c == 6:
+        if c6c == 1:
+            x += c6[month]['Unnamed: 14'][25]
+    if c == 0 or c == 7:
+        if c7c == 1:
+            x += c7[month]['Unnamed: 14'][25]
+    if c == 0 or c == 8:
+        if c8c == 1:
+            x += c8[month]['Unnamed: 14'][25]
 
     
     return x
